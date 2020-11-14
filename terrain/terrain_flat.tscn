@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://terrain/terrain_flat.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 576, 64 )
+
+[node name="terrain_flat" type="RigidBody2D"]
+mass = 65535.0
+gravity_scale = 0.0
+angular_damp = 100.0
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -64 )
+shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.811765, 0.384314, 0.984314, 1 )
+polygon = PoolVector2Array( -576, -128, -576, 0, 576, 0, 576, -128 )
