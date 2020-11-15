@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://enemies/enemy_group.gd" type="Script" id=1]
+[ext_resource path="res://enemies/enemy.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 20 )
+
+[node name="group_side" type="Node2D"]
+position = Vector2( 0, 240 )
+script = ExtResource( 1 )
+enemy_scene = ExtResource( 2 )
+
+[node name="bumper0" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bumper0"]
+shape = SubResource( 1 )
+
+[node name="bumper1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bumper1"]
+position = Vector2( 0, 720 )
+shape = SubResource( 1 )
+
+[node name="slots" type="Node2D" parent="."]
+
+[node name="slot0" type="Position2D" parent="slots"]
+position = Vector2( 0, 160 )
+
+[node name="slot1" type="Position2D" parent="slots"]
+position = Vector2( 0, 360 )
+
+[node name="slot2" type="Position2D" parent="slots"]
+position = Vector2( 0, 560 )
+
+[connection signal="area_entered" from="bumper0" to="." method="_on_bumper_area_entered"]
+[connection signal="area_entered" from="bumper1" to="." method="_on_bumper_area_entered"]

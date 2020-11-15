@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://terrain/terrain_flat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://level/level.gd" type="Script" id=3]
+[ext_resource path="res://enemies/group_side.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemies/group_top.tscn" type="PackedScene" id=5]
 
 [node name="level1" type="Node2D"]
 script = ExtResource( 3 )
@@ -21,3 +23,16 @@ position = Vector2( 2048, 1080 )
 
 [node name="terrain_flat4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 3072, 1080 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="group_top" parent="enemies" instance=ExtResource( 5 )]
+
+[node name="group_left" parent="enemies" instance=ExtResource( 4 )]
+enemy_group = "enemies_left"
+init_direction = Vector2( 0, 1 )
+
+[node name="group_right" parent="enemies" instance=ExtResource( 4 )]
+position = Vector2( 1920, 240 )
+enemy_group = "enemies_right"
+init_direction = Vector2( 0, -1 )
