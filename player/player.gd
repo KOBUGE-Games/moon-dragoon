@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var speed_y = -500
+var speed_y = -700
 var speed_x = 500
 
 # gravity scale of the rigid body
@@ -9,12 +9,7 @@ const GRAVITY_FLY = 5
 const MAX_ROTATION = PI/3
 
 # former states
-#var button_jump_old = false
-#var button_dash_old = false
-var contact_count_old
-
-#var jumps_left = 2
-var time = 0.0
+var contact_count_old # if there wont be different animations for flying and driving, this can be deleted
 
 func _integrate_forces(state):
 	
@@ -40,44 +35,28 @@ func _integrate_forces(state):
 		current_velocity.x = speed_x
 #		print("right")
 		
+	# rotate back to horizontal when flying
 	if contact_count == 0:
-		print("---")
-		print(get_angular_velocity())
 		set_angular_velocity(-get_rotation())
-		print(get_rotation())
 	if abs(get_rotation()) > MAX_ROTATION:
 		set_rotation(sign(get_rotation()) * MAX_ROTATION)
-#		set_angular_velocity(-sign(get_rotation()) * (MAX_ROTATION - abs(get_rotation())))
-#	else:
-#		set_angular_velocity(get_angular_velocity())
 	
 	
-	if (contact_count == 1) and (contact_count_old == 0):# and (jumps_left < 2):
-#		get_node("fox_body/animation").play("run")
-#		jumps_left = 2
+	if (contact_count == 1) and (contact_count_old == 0):
+		# FIXME add animation switch if needed, from flying to driving
 		pass
 	
-#	if button_jump and (button_jump_old == false) and jumps_left: # first jump button press
-	if button_jump and (contact_count == 1):
-#		get_node("fox_body/animation").play("jump")
+	if button_jump and (contact_count == 1): # jump
 		current_velocity.y = speed_y
-#		button_jump_old = button_jump
-#		jumps_left -= 1
 		set_angular_velocity(0)
-	elif button_jump and (state.get_contact_count() == 0): # keep jump button pressed
-		time += state.get_step()
+	elif button_jump and (state.get_contact_count() == 0): # reduce gravity
 		current_velocity.y = get_linear_velocity().y
 		set_gravity_scale(GRAVITY_FLY)
-	else: # no jump pressed
+	else: # no jump pressed, normal gravity
 		current_velocity.y = get_linear_velocity().y
-		time = 0.0
-#		button_jump_old = button_jump
 		set_gravity_scale(GRAVITY_NORMAL)
-		
 	
 	# safe former states
-#	button_jump_old = button_jump
-#	button_dash_old = button_dash
 	contact_count_old = contact_count
 	
 #	current_velocity.x = -get_global_position().x * 100

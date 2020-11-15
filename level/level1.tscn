@@ -1,19 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://terrain/terrain_flat.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level/level.gd" type="Script" id=3]
 
 [node name="level1" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 384, 960 )
+position = Vector2( 128, 952 )
 
 [node name="terrain_flat" parent="." instance=ExtResource( 2 )]
-position = Vector2( 576, 1088 )
+position = Vector2( 0, 1080 )
 
 [node name="terrain_flat2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1664, 1088 )
+position = Vector2( 1024, 1080 )
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.733333, 0.733333, 0.733333, 1 )
-polygon = PoolVector2Array( 1088, 960, 1024, 768, 1152, 768 )
+[node name="terrain_flat3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2048, 1080 )
+
+[node name="terrain_flat4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3072, 1080 )
