@@ -27,4 +27,4 @@ func create_terrain():
 func instance_terrain(terrain_type):
 	terrain_new = terrain_type.instance()
 	terrain_new.set_position(Vector2(global.length*3,global.screen_size.y))
-	add_child(terrain_new)
+	call_deferred("add_child", terrain_new)
