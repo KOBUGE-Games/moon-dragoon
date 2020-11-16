@@ -12,7 +12,6 @@ const MAX_ROTATION = PI/3
 var contact_count_old # if there wont be different animations for flying and driving, this can be deleted
 
 func _integrate_forces(state):
-	
 	# input events
 	var button_jump = Input.is_action_pressed("ui_up")
 	var button_left = Input.is_action_pressed("ui_left")
@@ -21,19 +20,12 @@ func _integrate_forces(state):
 	
 	var current_velocity = state.get_linear_velocity()
 	
-	# left and right movement
-	if !button_left and !button_right:
-		current_velocity.x = 0
-#		print("no button")
-	elif button_left and button_right:
-		current_velocity.x = 0
-#		print("2 button")
-	elif button_left:
-		current_velocity.x = -speed_x
-#		print("left")
-	elif button_right:
-		current_velocity.x = speed_x
-#		print("right")
+	# Horizontal movement always depends on input.
+	current_velocity.x = 0
+	if button_left:
+		current_velocity.x -= speed_x
+	if button_right:
+		current_velocity.x += speed_x
 		
 	# rotate back to horizontal when flying
 	if contact_count == 0:
@@ -59,5 +51,13 @@ func _integrate_forces(state):
 	# safe former states
 	contact_count_old = contact_count
 	
+	# Restrict position within game screen by scaling down velocity.
+	if position.x < 0 and current_velocity.x < 0:
+		# Down to 0 at -100 px.
+		current_velocity.x = lerp(current_velocity.x, 0, position.x / -100)
+	elif position.x > global.screen_size.x and current_velocity.x > 0:
+		# Down to 0 at screen width + 100 px.
+		current_velocity.x = lerp(current_velocity.x, 0, (position.x - global.screen_size.x) / 100)
+
 #	current_velocity.x = -get_global_position().x * 100
 	state.set_linear_velocity(current_velocity)

@@ -25,6 +25,5 @@ func _process(delta):
 
 # FIXME: Only added for debugging purpose, click == kill.
 func _on_enemy_input_event(_viewport, event, _shape_idx):
-	print(event)
 	if event is InputEventMouseButton:
 		queue_free()

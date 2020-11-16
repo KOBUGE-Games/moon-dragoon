@@ -12,18 +12,6 @@ script = ExtResource( 3 )
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 128, 952 )
 
-[node name="terrain_flat" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 1080 )
-
-[node name="terrain_flat2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1024, 1080 )
-
-[node name="terrain_flat3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2048, 1080 )
-
-[node name="terrain_flat4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 3072, 1080 )
-
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="group_top" parent="enemies" instance=ExtResource( 5 )]
@@ -36,3 +24,15 @@ init_direction = Vector2( 0, 1 )
 position = Vector2( 1920, 240 )
 enemy_group = "enemies_right"
 init_direction = Vector2( 0, -1 )
+
+[node name="terrain_flat" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 1080 )
+
+[node name="terrain_flat2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1024, 1080 )
+
+[node name="terrain_flat3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2048, 1080 )
+
+[node name="terrain_flat4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3072, 1080 )
