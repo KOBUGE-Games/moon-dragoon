@@ -7,7 +7,7 @@ friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 63.9996
-height = 128.001
+height = 128.0
 
 [node name="player" type="RigidBody2D"]
 collision_mask = 3

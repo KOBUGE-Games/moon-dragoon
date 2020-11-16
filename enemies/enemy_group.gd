@@ -10,6 +10,7 @@ export var init_direction = Vector2(1, 0)
 func _ready():
 	for slot in $slots.get_children():
 		var enemy = enemy_scene.instance()
+		enemy.group = enemy_group
 		enemy.add_to_group(enemy_group)
 		enemy.direction = init_direction
 		slot.add_child(enemy)

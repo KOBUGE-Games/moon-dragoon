@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Player
 
 var speed_y = -700
 var speed_x = 500
