@@ -11,6 +11,7 @@ height = 1024.0
 
 [node name="terrain_flat" type="RigidBody2D"]
 collision_mask = 2
+mode = 2
 mass = 65535.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0

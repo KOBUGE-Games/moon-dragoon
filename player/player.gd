@@ -9,15 +9,26 @@ const GRAVITY_NORMAL = 10
 const GRAVITY_FLY = 5
 const MAX_ROTATION = PI/3
 
-# former states
+# states
+var contact_count
 var contact_count_old # if there wont be different animations for flying and driving, this can be deleted
+
+var ground_detect
+
+func _ready():
+	ground_detect = get_node("ground_detect")
 
 func _integrate_forces(state):
 	# input events
 	var button_jump = Input.is_action_pressed("ui_up")
 	var button_left = Input.is_action_pressed("ui_left")
 	var button_right = Input.is_action_pressed("ui_right")
-	var contact_count = state.get_contact_count()
+	if ground_detect.is_colliding():
+		print("yay")
+		contact_count = 1
+	else:
+		print("nay")
+		contact_count = 0
 	
 	var current_velocity = state.get_linear_velocity()
 	
