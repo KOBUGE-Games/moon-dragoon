@@ -13,21 +13,30 @@ const MAX_ROTATION = PI/3
 var contact_count
 var contact_count_old # if there wont be different animations for flying and driving, this can be deleted
 
-var ground_detect
+onready var ground_detect = $ground_detect
+onready var shoot_timer = $shoot_timer
+onready var weapon = $weapon
 
-func _ready():
-	ground_detect = get_node("ground_detect")
+var weapon_rotation: float
 
 func _integrate_forces(state):
+	
+	# weapon rotation
+	weapon_rotation = (get_global_mouse_position()-weapon.get_global_position()).angle()
+	weapon.set_rotation(weapon_rotation)
+	
+	# weapon shoot
+	if Input.is_action_pressed("mouse_left") and shoot_timer.is_stopped():
+		shoot_timer.start() # start cool down
+		weapon.shoot(1, get_global_mouse_position()-self.get_global_position())
+	
 	# input events
 	var button_jump = Input.is_action_pressed("ui_up")
 	var button_left = Input.is_action_pressed("ui_left")
 	var button_right = Input.is_action_pressed("ui_right")
 	if ground_detect.is_colliding():
-		print("yay")
 		contact_count = 1
 	else:
-		print("nay")
 		contact_count = 0
 	
 	var current_velocity = state.get_linear_velocity()
