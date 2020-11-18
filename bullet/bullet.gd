@@ -1,6 +1,7 @@
 extends Area2D
 
 export var speed = 300
+export var friendly = false
 
 export var direction = Vector2(0, 1)
 
@@ -21,7 +22,17 @@ func _ready():
 func _physics_process(delta):
 	position += direction * speed * delta
 
+	if position.x < 0 or position.x > global.screen_size.x \
+			or position.y < 0 or position.y > global.screen_size.y:
+		queue_free()
+
 
 func _on_bullet_body_entered(body):
-	if body is Player:
+	if not friendly and body is Player:
 		print("Player hit!")
+
+
+func _on_bullet_area_entered(area):
+	if friendly and area is Enemy:
+		print("Enemy hit!")
+		area.queue_free()

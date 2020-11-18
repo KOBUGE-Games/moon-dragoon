@@ -19,17 +19,17 @@ onready var weapon = $weapon
 
 var weapon_rotation: float
 
-func _integrate_forces(state):
-	
+func _physics_process(delta):
 	# weapon rotation
-	weapon_rotation = (get_global_mouse_position()-weapon.get_global_position()).angle()
+	weapon_rotation = (get_global_mouse_position() - weapon.get_global_position()).angle()
 	weapon.set_rotation(weapon_rotation)
 	
 	# weapon shoot
 	if Input.is_action_pressed("mouse_left") and shoot_timer.is_stopped():
 		shoot_timer.start() # start cool down
-		weapon.shoot(1, get_global_mouse_position()-self.get_global_position())
-	
+		weapon.shoot((get_global_mouse_position() - self.get_global_position()).normalized())
+
+func _integrate_forces(state):
 	# input events
 	var button_jump = Input.is_action_pressed("ui_up")
 	var button_left = Input.is_action_pressed("ui_left")
