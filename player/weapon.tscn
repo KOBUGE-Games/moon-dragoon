@@ -7,40 +7,17 @@
 [sub_resource type="Animation" id=1]
 resource_name = "shoot"
 length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("muzzle_end:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 96, 0 ), Vector2( 80, 0 ), Vector2( 96, 0 ) ]
-}
 
 [node name="weapon" type="Sprite"]
 texture = ExtResource( 1 )
+offset = Vector2( 32, 0 )
 region_enabled = true
-region_rect = Rect2( 146, 144, 88, 96 )
+region_rect = Rect2( 64, 128, 128, 64 )
 script = ExtResource( 2 )
 bullet_scene = ExtResource( 3 )
 
-[node name="muzzle" type="Sprite" parent="."]
-position = Vector2( 56, 0 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 50, 240, 64, 40 )
-
-[node name="muzzle_end" type="Sprite" parent="."]
-position = Vector2( 96, 0 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 130, 248, 24, 24 )
-
 [node name="exit" type="Position2D" parent="."]
-position = Vector2( 104, 0 )
+position = Vector2( 64, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/shoot = SubResource( 1 )

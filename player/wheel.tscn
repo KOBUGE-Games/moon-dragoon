@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player/player.png" type="Texture" id=1]
+[ext_resource path="res://player/wheel.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "rotate"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("wheel_sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "rotate_stop"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("wheel_sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="wheel" type="RigidBody2D"]
+position = Vector2( -88, -72 )
+collision_layer = 17
+collision_mask = 16
+mode = 2
+mass = 0.01
+physics_material_override = SubResource( 1 )
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 2 )
+
+[node name="wheel_col" type="CollisionShape2D" parent="."]
+position = Vector2( -8, 40 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="wheel_sprite" type="Sprite" parent="."]
+position = Vector2( -8, 40 )
+rotation = 1.5708
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 256, 128, 128 )
+
+[node name="Spring" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 24, 8 )
+rotation = 0.785397
+node_a = NodePath("../..")
+node_b = NodePath("..")
+disable_collision = false
+length = 24.0
+stiffness = 64.0
+damping = 0.5
+
+[node name="Groove" type="GrooveJoint2D" parent="."]
+position = Vector2( 8, 24 )
+rotation = 0.785397
+node_a = NodePath("../..")
+node_b = NodePath("..")
+disable_collision = false
+length = 24.0
+initial_offset = 1.0
+
+[node name="ground_detect" type="RayCast2D" parent="."]
+position = Vector2( -8, 72 )
+enabled = true
+cast_to = Vector2( 0, 1 )
+collision_mask = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/rotate = SubResource( 3 )
+anims/rotate_stop = SubResource( 4 )
+next/rotate = "rotate_stop"
+next/rotate_stop = "rotate_stop"
+blend_times = [ "rotate", "rotate", 0.1, "rotate", "rotate_stop", 0.1, "rotate_stop", "rotate", 0.2 ]

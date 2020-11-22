@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://terrain/terrain_flat.gd" type="Script" id=1]
+[ext_resource path="res://terrain/terrain.png" type="Texture" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -10,6 +11,7 @@ radius = 64.0
 height = 1024.0
 
 [node name="terrain_flat" type="RigidBody2D"]
+collision_layer = 17
 collision_mask = 2
 mode = 2
 mass = 65535.0
@@ -22,6 +24,8 @@ position = Vector2( 0, -64 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.811765, 0.384314, 0.984314, 1 )
-polygon = PoolVector2Array( -512, -128, -512, 0, 512, 0, 512, -64 )
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -128 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 448, 1024, 256 )
