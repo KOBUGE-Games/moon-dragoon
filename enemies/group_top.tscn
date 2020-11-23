@@ -24,27 +24,25 @@ position = Vector2( 20, 100 )
 shape = SubResource( 1 )
 
 [node name="slots" type="Node2D" parent="."]
+position = Vector2( 8, 0 )
 
 [node name="slot0" type="Position2D" parent="slots"]
-position = Vector2( 200, 100 )
+position = Vector2( 272, 100 )
 
 [node name="slot1" type="Position2D" parent="slots"]
-position = Vector2( 450, 100 )
+position = Vector2( 544, 100 )
 
 [node name="slot2" type="Position2D" parent="slots"]
-position = Vector2( 700, 100 )
+position = Vector2( 816, 100 )
 
 [node name="slot3" type="Position2D" parent="slots"]
-position = Vector2( 950, 100 )
+position = Vector2( 1088, 100 )
 
 [node name="slot4" type="Position2D" parent="slots"]
-position = Vector2( 1200, 100 )
+position = Vector2( 1360, 100 )
 
 [node name="slot5" type="Position2D" parent="slots"]
-position = Vector2( 1450, 100 )
-
-[node name="slot6" type="Position2D" parent="slots"]
-position = Vector2( 1700, 100 )
+position = Vector2( 1632, 100 )
 
 [connection signal="area_entered" from="bumper0" to="." method="_on_bumper_area_entered"]
 [connection signal="area_entered" from="bumper1" to="." method="_on_bumper_area_entered"]

@@ -19,7 +19,7 @@ onready var weapon = $weapon
 
 var weapon_rotation: float
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# weapon rotation
 	weapon_rotation = (get_global_mouse_position() - weapon.get_global_position()).angle()
 	weapon.set_rotation(weapon_rotation)
