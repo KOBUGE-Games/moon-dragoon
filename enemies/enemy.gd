@@ -9,6 +9,7 @@ export var direction = Vector2(1, 0)
 var group
 
 export(PackedScene) var bullet_scene
+export(NodePath) var bullets_container
 
 const BULLET_DIRECTIONS = {
 	"enemies_top": Vector2(0, 1),
@@ -39,7 +40,6 @@ func _on_bullet_time_timeout():
 	bullet.rotation_degrees = -bullet.direction.x * 90
 	bullet.position = global_position
 	bullet.friendly = false
-	# FIXME: Find a nicer way to access this.
-	global.level.add_child(bullet)
+	get_node(bullets_container).add_child(bullet)
 	# Restart with bullet's cooldown time.
 	$bullet_time.wait_time = bullet.get_cooldown()

@@ -14,6 +14,12 @@ func get_cooldown():
 
 
 func _ready():
+	# Toplevel means that it evolves in global coordinates,
+	# and ignores the coordinates offset from its parent.
+	# So we don't need to put those bullets as children of the level
+	# scene to move independently from player.
+	set_as_toplevel(true)
+
 	# FIXME: This is only for the lulz until proper artwork.
 	modulate = Color(randf(), randf(), randf()).lightened(0.5)
 	scale = Vector2(rand_range(0.7, 2.0), rand_range(0.7, 2.0))

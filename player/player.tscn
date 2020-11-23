@@ -12,11 +12,11 @@ friction = 0.0
 a = Vector2( -88, 8 )
 b = Vector2( -128, 64 )
 
-[sub_resource type="SegmentShape2D" id=6]
+[sub_resource type="SegmentShape2D" id=3]
 a = Vector2( -88, 8 )
 b = Vector2( -48, 64 )
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 radius = 40.0
 
 [node name="player" type="RigidBody2D"]
@@ -40,6 +40,7 @@ region_rect = Rect2( 0, 192, 256, 192 )
 
 [node name="weapon" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -64 )
+bullets_container = NodePath("../bullets")
 
 [node name="weapon_cover" type="Sprite" parent="."]
 position = Vector2( 0, -64 )
@@ -47,18 +48,23 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 128, 64, 64 )
 
+[node name="bullets" type="Node2D" parent="."]
+__meta__ = {
+"_editor_description_": "Just a container node to put all instantiated bullets, so they're easily to find when remote debugging."
+}
+
 [node name="wheel_limiter" type="CollisionShape2D" parent="."]
 position = Vector2( 1.45519e-11, -112 )
 shape = SubResource( 2 )
 
 [node name="wheel_limiter2" type="CollisionShape2D" parent="."]
 position = Vector2( 176, -112 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="circle" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -72 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="wheel1" parent="." instance=ExtResource( 4 )]
 
@@ -72,6 +78,9 @@ rotation = -0.785397
 [node name="Groove" parent="wheel2" index="3"]
 position = Vector2( -24, 24 )
 rotation = -0.785397
+
+[node name="AnimationPlayer" parent="wheel2" index="5"]
+blend_times = [ "rotate", "rotate", 0.1, "rotate", "rotate_stop", 0.1, "rotate_stop", "rotate", 0.2 ]
 
 [node name="shoot_timer" type="Timer" parent="."]
 process_mode = 0
