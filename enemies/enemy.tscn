@@ -1,22 +1,73 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://enemies/enemy.gd" type="Script" id=1]
 [ext_resource path="res://bullet/bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player/player.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 58.2377, 40.0466 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 62.482
+
+[sub_resource type="Animation" id=2]
+resource_name = "boost"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("boost:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.95 ), Vector2( 1, 1 ) ]
+}
 
 [node name="enemy" type="Area2D"]
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2( -84.8528, -62.2254 )
-polygon = PoolVector2Array( 46.924, 22.1788, 66.723, 61.7768, 22.8824, 98.5464, 152.99, 98.5464, 106.321, 61.7768, 123.292, 23.593 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="bullet_time" type="Timer" parent="."]
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+vframes = 3
+hframes = 4
+
+[node name="sprite_rotate" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="boost" type="Sprite" parent="sprite_rotate"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 352, 128, 64, 128 )
+
+[node name="muzzle" type="Sprite" parent="sprite_rotate"]
+position = Vector2( 32, 0 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 352, 160, 128, 64 )
+
+[node name="eye" type="Sprite" parent="sprite_rotate"]
+z_index = 1
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 416, 256, 64, 128 )
+
+[node name="weapon" type="Sprite" parent="sprite_rotate"]
+position = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 192, 130, 128, 60 )
+
+[node name="exit" type="Position2D" parent="sprite_rotate"]
+position = Vector2( 120, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sprite_rotate"]
+autoplay = "boost"
+anims/boost = SubResource( 2 )
 [connection signal="timeout" from="bullet_time" to="." method="_on_bullet_time_timeout"]

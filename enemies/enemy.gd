@@ -25,8 +25,11 @@ func die():
 
 
 func _ready():
-	# FIXME: Temporary coloring to make programmer art less boring.
-	$Polygon2D.modulate = Color(randf(), randf(), randf())
+	# FIXME make different kind of enemies, each assigned a different color and shooting pattern
+	# change colors
+	$Sprite.set_frame(randi()%4)
+	var sprite_rotation = BULLET_DIRECTIONS[group].angle()
+	$sprite_rotate.set_rotation(sprite_rotation)
 
 	$bullet_time.start(rand_range(2.0, 5.0))
 
@@ -36,7 +39,7 @@ func _on_bullet_time_timeout():
 	var bullet = bullet_scene.instance()
 	bullet.direction = BULLET_DIRECTIONS[group]
 	bullet.rotation_degrees = -bullet.direction.x * 90
-	bullet.position = global_position
+	bullet.position = $sprite_rotate/exit.global_position
 	bullet.speed = bullet_speed
 	bullet.friendly = false
 	get_parent().add_child(bullet)
