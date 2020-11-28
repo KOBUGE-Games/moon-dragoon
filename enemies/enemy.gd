@@ -3,7 +3,6 @@ class_name Enemy
 
 
 export(PackedScene) var bullet_scene
-export(NodePath) var bullets_container
 
 export var bullet_speed = 300
 
@@ -40,6 +39,6 @@ func _on_bullet_time_timeout():
 	bullet.position = global_position
 	bullet.speed = bullet_speed
 	bullet.friendly = false
-	get_node(bullets_container).add_child(bullet)
+	get_parent().add_child(bullet)
 	# Restart with bullet's cooldown time.
 	$bullet_time.wait_time = bullet.get_cooldown()

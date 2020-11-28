@@ -9,7 +9,6 @@ extents = Vector2( 58.2377, 40.0466 )
 [node name="enemy" type="Area2D"]
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
-bullets_container = NodePath("bullets")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2( -84.8528, -62.2254 )
@@ -19,7 +18,5 @@ polygon = PoolVector2Array( 46.924, 22.1788, 66.723, 61.7768, 22.8824, 98.5464, 
 shape = SubResource( 1 )
 
 [node name="bullet_time" type="Timer" parent="."]
-
-[node name="bullets" type="Node2D" parent="."]
 
 [connection signal="timeout" from="bullet_time" to="." method="_on_bullet_time_timeout"]
