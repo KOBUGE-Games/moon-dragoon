@@ -31,4 +31,4 @@ shape = SubResource( 2 )
 position = Vector2( 0, -128 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 128, 448, 1024, 256 )
+region_rect = Rect2( 64, 448, 1152, 256 )
