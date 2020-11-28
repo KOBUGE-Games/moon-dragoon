@@ -41,4 +41,4 @@ func _on_bullet_body_entered(body):
 func _on_bullet_area_entered(area):
 	if friendly and area is Enemy:
 		print("Enemy hit!")
-		area.queue_free()
+		area.die()

@@ -11,13 +11,14 @@ script = ExtResource( 1 )
 enemy_scene = ExtResource( 2 )
 
 [node name="bumper0" type="Area2D" parent="."]
+position = Vector2( 20, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bumper0"]
 position = Vector2( -20, 100 )
 shape = SubResource( 1 )
 
 [node name="bumper1" type="Area2D" parent="."]
-position = Vector2( 1920, 0 )
+position = Vector2( 1900, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bumper1"]
 position = Vector2( 20, 100 )

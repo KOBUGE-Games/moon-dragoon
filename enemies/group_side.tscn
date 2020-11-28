@@ -7,9 +7,14 @@
 extents = Vector2( 60, 20 )
 
 [node name="group_side" type="Node2D"]
-position = Vector2( 0, 240 )
+position = Vector2( 0, 200 )
 script = ExtResource( 1 )
 enemy_scene = ExtResource( 2 )
+enemy_group = "enemies_left"
+direction = Vector2( 0, 1 )
+speed = 200
+spawn_time_min = 3.0
+spawn_time_max = 7.0
 
 [node name="bumper0" type="Area2D" parent="."]
 
@@ -17,21 +22,21 @@ enemy_scene = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="bumper1" type="Area2D" parent="."]
+position = Vector2( 0, 700 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bumper1"]
-position = Vector2( 0, 720 )
 shape = SubResource( 1 )
 
 [node name="slots" type="Node2D" parent="."]
 
 [node name="slot0" type="Position2D" parent="slots"]
-position = Vector2( 0, 160 )
+position = Vector2( 0, 150 )
 
 [node name="slot1" type="Position2D" parent="slots"]
-position = Vector2( 0, 360 )
+position = Vector2( 0, 350 )
 
 [node name="slot2" type="Position2D" parent="slots"]
-position = Vector2( 0, 560 )
+position = Vector2( 0, 550 )
 
 [connection signal="area_entered" from="bumper0" to="." method="_on_bumper_area_entered"]
 [connection signal="area_entered" from="bumper1" to="." method="_on_bumper_area_entered"]

@@ -1,7 +1,7 @@
 extends Sprite
 
 
-export var bullet_speed: int = 450
+export var bullet_speed: int = 600
 export(PackedScene) var bullet_scene
 export(NodePath) var bullets_container
 
