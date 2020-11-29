@@ -110,5 +110,7 @@ func _on_shield_timer_timeout():
 
 func die():
 	# Explode!
+	$explosion_anim.play("explode")
+	yield($explosion_anim, "animation_finished")
 	queue_free()
 	print("Game over!")
