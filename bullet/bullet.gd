@@ -21,8 +21,12 @@ func _ready():
 	set_as_toplevel(true)
 
 	# FIXME: This is only for the lulz until proper artwork.
-	modulate = Color(randf(), randf(), randf()).lightened(0.5)
-	scale = Vector2(rand_range(0.7, 2.0), rand_range(0.7, 2.0))
+	if friendly:
+		$Sprite.set_frame(0)
+		$shimmer.set_self_modulate(Color("ffcc00"))
+	else:
+		$Sprite.set_frame(1)
+		$shimmer.set_self_modulate(Color("cd87de"))
 
 
 func _physics_process(delta):
