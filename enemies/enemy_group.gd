@@ -36,6 +36,7 @@ func _ready():
 	timer.name = "spawn_timer"
 	timer.wait_time = get_spawn_time() / 2.0 # Go faster the first round.
 	timer.autostart = true
+	# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "_on_spawn_timer_timeout")
 	add_child(timer)
 
@@ -66,8 +67,8 @@ func is_slot_in_range(slot):
 		in_range = (slot_node.global_position.x > position.x + $bumper0.position.x + 100 and
 				slot_node.global_position.x < position.x + $bumper1.position.x - 100)
 	else:
-		in_range = (slot_node.global_position.y > position.y + $bumper0.position.y + 60 and
-				slot_node.global_position.y < position.y + $bumper1.position.y - 60)
+		in_range = (slot_node.global_position.y > position.y + $bumper0.position.y + 100 and
+				slot_node.global_position.y < position.y + $bumper1.position.y - 100)
 	return in_range
 
 
