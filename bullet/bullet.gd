@@ -35,10 +35,12 @@ func _physics_process(delta):
 
 func _on_bullet_body_entered(body):
 	if not friendly and body is Player:
-		print("Player hit!")
+		body.hit()
+		queue_free()
 
 
 func _on_bullet_area_entered(area):
 	if friendly and area is Enemy:
 		print("Enemy hit!")
 		area.die()
+		queue_free()

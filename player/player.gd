@@ -5,6 +5,10 @@ class_name Player
 var speed_y = -700
 var speed_x = 500
 
+# damage handling
+const SHIELD_MAX = 3
+var shield = SHIELD_MAX
+
 # gravity scale of the rigid body
 const GRAVITY_NORMAL = 10
 const GRAVITY_FLY = 5
@@ -30,6 +34,9 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("mouse_left") and shoot_timer.is_stopped():
 		shoot_timer.start() # start cool down
 		weapon.shoot((get_global_mouse_position() - self.get_global_position()).normalized())
+
+	# shield debug
+	$shield_label.text = "Shield: %d - %f" % [shield, $shield_timer.time_left]
 
 
 func _integrate_forces(state):
@@ -84,3 +91,24 @@ func _integrate_forces(state):
 
 #	current_velocity.x = -get_global_position().x * 100
 	state.set_linear_velocity(current_velocity)
+
+
+func hit():
+	print("Player hit")
+	if shield > 0:
+		shield -= 1
+		$shield_timer.start()
+	else:
+		die()
+
+
+func _on_shield_timer_timeout():
+	shield += 1
+	if shield < SHIELD_MAX:
+		$shield_timer.start()
+
+
+func die():
+	# Explode!
+	queue_free()
+	print("Game over!")
