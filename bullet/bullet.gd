@@ -39,7 +39,7 @@ func _physics_process(delta):
 
 func _on_bullet_body_entered(body):
 	if not friendly and body is Player:
-		body.hit()
+		body.hit(direction)
 		queue_free()
 
 

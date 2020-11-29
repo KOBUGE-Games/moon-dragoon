@@ -93,11 +93,13 @@ func _integrate_forces(state):
 	state.set_linear_velocity(current_velocity)
 
 
-func hit():
+func hit(direction):
 	print("Player hit")
 	if shield > 0:
 		shield -= 1
 		$shield_timer.start()
+		$shield.set_rotation(direction.angle())
+		$explosion_anim.play("shield")
 	else:
 		die()
 
