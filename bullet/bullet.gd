@@ -35,10 +35,13 @@ func _physics_process(delta):
 
 
 func _on_bullet_body_entered(body):
-	if not friendly and body is Player:
+	if friendly:
+		return
+
+	if body is Player:
 		body.hit(direction)
 		queue_free()
-	if body is Terrain:
+	elif body is Terrain:
 		# Stop detecting.
 		can_free = false
 		collision_layer = 0
