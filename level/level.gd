@@ -35,6 +35,6 @@ func instance_terrain(terrain_type):
 
 
 func _on_player_killed():
-	global.game_over = true
+	global.game_over()
 	get_tree().call_group("enemies", "go_nuts")
 	$ui.game_over()

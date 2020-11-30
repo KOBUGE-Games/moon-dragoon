@@ -18,12 +18,25 @@ var enemies_killed : int = 0
 
 var music : bool = true
 
+const HIGH_SCORES_FILE = "user://highscores.cfg"
+
+# Stores as an array of arrays with score and name.
+var high_scores = [
+	[10000, "Godette"],
+	[9001, "Vegeta"],
+	[8000, "Juan Alpaca"],
+	[6000, "Minilens Mk II"],
+	[5000, "Melon Musk"],
+]
+
+
 func _ready():
 	# set pause mode to process, keep running when game is paused
 	set_pause_mode(2)
 
 	Input.action_press("ui_cancel")
 	randomize()
+	load_high_scores()
 
 
 func _physics_process(_delta):
@@ -56,6 +69,18 @@ func increase_score(base_score):
 		highest_combo = combo
 
 
+func game_over():
+	game_over = true
+	high_scores.append([score, "YOU"])
+	high_scores.sort_custom(self, "sort_high_scores")
+	high_scores.pop_back()
+	save_high_scores()
+
+
+func sort_high_scores(a, b):
+	return a[0] > b[0]
+
+
 func restart():
 	start_time = OS.get_system_time_secs()
 	time_passed = 0
@@ -65,3 +90,23 @@ func restart():
 	highest_combo = 0
 	enemies_killed = 0
 	get_tree().reload_current_scene()
+
+
+func load_high_scores():
+	var cfg = ConfigFile.new()
+	var err = cfg.load(HIGH_SCORES_FILE)
+	if err == OK: # Load high scores.
+		high_scores = cfg.get_value("highscores", "list", high_scores)
+	elif err == ERR_FILE_NOT_FOUND: # Save default high scores.
+		cfg.set_value("highscores", "list", high_scores)
+		cfg.save(HIGH_SCORES_FILE)
+	else:
+		print("An error occurred while loading high scores.")
+
+
+func save_high_scores():
+	var cfg = ConfigFile.new()
+	cfg.set_value("highscores", "list", high_scores)
+	var err = cfg.save(HIGH_SCORES_FILE)
+	if err != OK:
+		print("An error occurred while saving high scores.")
