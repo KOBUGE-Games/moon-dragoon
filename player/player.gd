@@ -25,6 +25,9 @@ onready var weapon = $weapon
 var weapon_rotation: float
 
 
+signal killed
+
+
 func _physics_process(_delta):
 	# weapon rotation
 	weapon_rotation = (get_global_mouse_position() - weapon.get_global_position()).angle()
@@ -91,6 +94,9 @@ func _integrate_forces(state):
 
 
 func hit(direction):
+	# Reset combo.
+	global.combo = 0
+	# Decrease shield health and (re)start charge cooldown, or die.
 	if shield > 0:
 		shield -= 1
 		$shield_timer.start()
@@ -110,5 +116,5 @@ func die():
 	# Explode!
 	$explosion_anim.play("explode")
 	yield($explosion_anim, "animation_finished")
+	emit_signal("killed")
 	queue_free()
-	print("Game over!")

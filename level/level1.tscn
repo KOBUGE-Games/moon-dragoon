@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://terrain/terrain_flat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://level/level.gd" type="Script" id=3]
 [ext_resource path="res://enemies/group_side.tscn" type="PackedScene" id=4]
 [ext_resource path="res://enemies/group_top.tscn" type="PackedScene" id=5]
+[ext_resource path="res://level/ui.gd" type="Script" id=6]
 
 [node name="level1" type="Node2D"]
 script = ExtResource( 3 )
@@ -33,3 +34,20 @@ position = Vector2( 2048, 1080 )
 
 [node name="terrain_flat4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 3072, 1080 )
+
+[node name="ui" type="CanvasLayer" parent="."]
+script = ExtResource( 6 )
+
+[node name="score" type="Label" parent="ui"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 84.0
+margin_bottom = 47.0
+rect_scale = Vector2( 2, 2 )
+text = "Score: 0
+Combo: 1x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="killed" from="player" to="ui" method="_on_player_killed"]

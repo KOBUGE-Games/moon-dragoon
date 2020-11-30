@@ -5,6 +5,7 @@ class_name Enemy
 export(PackedScene) var bullet_scene
 
 export var bullet_speed = 400
+export var base_score = 25
 
 const BULLET_DIRECTIONS = {
 	"enemies_top": Vector2(0, 1),
@@ -61,6 +62,8 @@ func _on_bullet_time_timeout():
 
 
 func _on_die_time_timeout():
-	# die after explosion animation finished
+	# Increase score count.
+	global.increase_score(base_score)
+	# Die after explosion animation finished
 	emit_signal("killed", slot)
 	queue_free()
