@@ -14,18 +14,33 @@ func _ready():
 	$game_over.hide()
 	$info.hide()
 
+	if global.first_run:
+		global.first_run = false
+		show_info()
+
+
+func show_info():
+	$info.show()
+	$AnimationPlayer.play("info")
+	get_tree().set_pause(true)
+
+
+func hide_info():
+	$info.hide()
+	get_tree().set_pause(false)
+	$AnimationPlayer.stop()
+
 
 func _process(_delta):
 	live_score.text = SCORE_TEMPLATE % [global.score, global.combo, global.enemies_killed]
 
 	if Input.is_action_just_pressed("ui_cancel") and not $info.is_visible_in_tree():
-		$info.show()
-		$AnimationPlayer.play("info")
-		get_tree().set_pause(true)
-	elif Input.is_action_just_pressed("ui_cancel") and $info.is_visible_in_tree():
-		$info.hide()
-		get_tree().set_pause(false)
-		$AnimationPlayer.stop()
+		show_info()
+	elif $info.is_visible_in_tree() and (
+			Input.is_action_just_pressed("ui_cancel") or
+			Input.is_action_just_pressed("ui_accept")
+	):
+		hide_info()
 
 	if global.game_over:
 		if Input.is_action_just_pressed("ui_accept"):

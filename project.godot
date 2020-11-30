@@ -34,7 +34,7 @@ _global_script_class_icons={
 
 config/name="MoonDragoon"
 run/main_scene="res://level/level1.tscn"
-config/icon="res://icon.png"
+config/icon="res://level/earth.png"
 
 [autoload]
 

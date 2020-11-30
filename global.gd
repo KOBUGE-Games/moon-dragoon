@@ -18,6 +18,8 @@ var enemies_killed : int = 0
 
 var music : bool = true
 
+var first_run = true  # Show info.
+
 const HIGH_SCORES_FILE = "user://highscores.cfg"
 
 # Stores as an array of arrays with score and name.
@@ -32,9 +34,8 @@ var high_scores = [
 
 func _ready():
 	# set pause mode to process, keep running when game is paused
-	set_pause_mode(2)
+	set_pause_mode(PAUSE_MODE_PROCESS)
 
-	Input.action_press("ui_cancel")
 	randomize()
 	load_high_scores()
 
@@ -69,7 +70,7 @@ func increase_score(base_score):
 		highest_combo = combo
 
 
-func game_over():
+func set_game_over():
 	game_over = true
 	high_scores.append([score, "YOU"])
 	high_scores.sort_custom(self, "sort_high_scores")

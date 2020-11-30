@@ -23,7 +23,7 @@ spawn_time_endgame = Vector2( 1.5, 4 )
 shape = SubResource( 1 )
 
 [node name="bumper1" type="Area2D" parent="."]
-position = Vector2( 0, 700 )
+position = Vector2( 0, 760 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bumper1"]
 shape = SubResource( 1 )
@@ -31,12 +31,12 @@ shape = SubResource( 1 )
 [node name="slots" type="Node2D" parent="."]
 
 [node name="slot0" type="Position2D" parent="slots"]
-position = Vector2( 0, 150 )
+position = Vector2( 0, 180 )
 
 [node name="slot1" type="Position2D" parent="slots"]
-position = Vector2( 0, 350 )
+position = Vector2( 0, 380 )
 
 [node name="slot2" type="Position2D" parent="slots"]
-position = Vector2( 0, 550 )
+position = Vector2( 0, 580 )
 [connection signal="area_entered" from="bumper0" to="." method="_on_bumper_area_entered"]
 [connection signal="area_entered" from="bumper1" to="." method="_on_bumper_area_entered"]
