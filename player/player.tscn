@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://player/player.png" type="Texture" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://player/healthbar_refill.png" type="Texture" id=10]
 [ext_resource path="res://player/healthbar_refill_bg.png" type="Texture" id=11]
 [ext_resource path="res://player/flaunch.wav" type="AudioStream" id=12]
+[ext_resource path="res://player/sword-1.wav" type="AudioStream" id=13]
+[ext_resource path="res://player/dark-shoot.wav" type="AudioStream" id=14]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -72,6 +74,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("sounds/shield:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="SegmentShape2D" id=4]
 a = Vector2( -88, 8 )
@@ -117,6 +131,7 @@ scale = Vector2( 1.5, 1.5 )
 z_index = 1
 texture = ExtResource( 5 )
 hframes = 8
+frame = 7
 
 [node name="explosion_anim" type="AnimationPlayer" parent="."]
 anims/explode = SubResource( 2 )
@@ -158,6 +173,7 @@ blend_times = [ "rotate", "rotate", 0.1, "rotate", "rotate_stop", 0.1, "rotate_s
 
 [node name="shield" type="Sprite" parent="."]
 visible = false
+self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -32 )
 texture = ExtResource( 6 )
 
@@ -170,11 +186,6 @@ one_shot = true
 process_mode = 0
 wait_time = 2.0
 one_shot = true
-
-[node name="shoot_sound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 0, -64 )
-stream = ExtResource( 12 )
-attenuation = 1.21838
 
 [node name="shield_lifes" type="TextureProgress" parent="."]
 margin_left = -128.0
@@ -196,6 +207,22 @@ margin_bottom = 104.0
 rect_scale = Vector2( 1, 0.25 )
 texture_under = ExtResource( 11 )
 texture_progress = ExtResource( 10 )
+
+[node name="sounds" type="Node2D" parent="."]
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="sounds"]
+position = Vector2( 0, -64 )
+stream = ExtResource( 12 )
+volume_db = -8.0
+attenuation = 1.21838
+
+[node name="shield" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 13 )
+volume_db = 5.0
+
+[node name="explode" type="AudioStreamPlayer2D" parent="sounds"]
+stream = ExtResource( 14 )
+volume_db = 10.0
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
 
 [editable path="wheel2"]

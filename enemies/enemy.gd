@@ -28,6 +28,7 @@ signal killed(slot)
 
 
 func die():
+	$explode.play()
 	$AnimationPlayer.play("explosion")
 	$bullet_time.stop() # dont shoot when dying
 	# start to die

@@ -8,6 +8,13 @@ CC0
 <https://opengameart.org/content/4-projectile-launches>
 CC-BY 3.0
 
+### player shield sound, explosions
+## SuperPowers
+<https://opengameart.org/content/superpowers-assets-sound-effects>
+<http://superpowers-html5.com/>
+CC0
+
+
 ### earth background
 ## NASA
 <https://images.nasa.gov/>

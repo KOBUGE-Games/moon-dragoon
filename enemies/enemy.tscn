@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://enemies/enemy.gd" type="Script" id=1]
 [ext_resource path="res://bullet/bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/player.png" type="Texture" id=3]
 [ext_resource path="res://enemies/explosion192.png" type="Texture" id=4]
+[ext_resource path="res://enemies/explosion-1.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 62.482
@@ -235,5 +236,8 @@ position = Vector2( 120, 0 )
 
 [node name="anim_nuts" type="AnimationPlayer" parent="."]
 anims/dance = SubResource( 5 )
+
+[node name="explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
 [connection signal="timeout" from="bullet_time" to="." method="_on_bullet_time_timeout"]
 [connection signal="timeout" from="die_time" to="." method="_on_die_time_timeout"]

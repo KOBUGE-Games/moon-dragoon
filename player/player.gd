@@ -37,7 +37,7 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("mouse_left") and shoot_timer.is_stopped():
 		shoot_timer.start() # start cool down
 		weapon.shoot((get_global_mouse_position() - self.get_global_position()).normalized())
-		$shoot_sound.play()
+		$sounds/shoot.play()
 
 
 func _integrate_forces(state):
@@ -115,6 +115,7 @@ func _on_shield_timer_timeout():
 
 func die():
 	# Explode!
+	$sounds/explode.play()
 	$explosion_anim.play("explode")
 	yield($explosion_anim, "animation_finished")
 	emit_signal("killed")
