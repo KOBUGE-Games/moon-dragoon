@@ -16,8 +16,13 @@ var combo : int = 0
 var highest_combo : int = 0
 var enemies_killed : int = 0
 
+var music : bool = true
 
 func _ready():
+	# set pause mode to process, keep running when game is paused
+	set_pause_mode(2)
+	
+	Input.action_press("ui_cancel")
 	randomize()
 
 
@@ -27,6 +32,15 @@ func _physics_process(_delta):
 	if counter > 30:
 		counter = 0
 		time_passed = OS.get_system_time_secs() - start_time
+	
+	# toggle all music and sfx
+	if Input.is_action_just_pressed("toggle music") and music:
+		AudioServer.set_bus_mute(0,true)
+		music = false
+	elif Input.is_action_just_pressed("toggle music") and not music:
+		AudioServer.set_bus_mute(0,false)
+		music = true
+		
 
 
 func get_difficulty_ratio():

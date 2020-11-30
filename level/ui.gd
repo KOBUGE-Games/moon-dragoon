@@ -12,11 +12,20 @@ Enemies killed: %d
 
 func _ready():
 	$game_over.hide()
+	$info.hide()
 
 
 func _process(_delta):
 	live_score.text = SCORE_TEMPLATE % [global.score, global.combo, global.enemies_killed]
-
+	if Input.is_action_just_pressed("ui_cancel") and not $info.is_visible_in_tree():
+		$info.show()
+		$AnimationPlayer.play("info")
+		get_tree().set_pause(true)
+	elif Input.is_action_just_pressed("ui_cancel") and $info.is_visible_in_tree():
+		$info.hide()
+		get_tree().set_pause(false)
+		$AnimationPlayer.stop()
+		
 
 func game_over():
 	$AnimationPlayer.play("game_over")
