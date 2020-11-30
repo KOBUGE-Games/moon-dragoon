@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://terrain/terrain_flat.tscn" type="PackedScene" id=2]
@@ -15,10 +15,15 @@
 [ext_resource path="res://level/music1.ogg" type="AudioStream" id=13]
 [ext_resource path="res://level/music2.ogg" type="AudioStream" id=14]
 [ext_resource path="res://fonts/buttons.png" type="Texture" id=15]
+[ext_resource path="res://fonts/FiraMono-Regular.ttf" type="DynamicFontData" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 42
+font_data = ExtResource( 16 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
@@ -230,9 +235,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -663.0
-margin_top = -410.0
+margin_top = -448.0
 margin_right = 663.0
-margin_bottom = 428.0
+margin_bottom = 446.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -249,22 +254,38 @@ bbcode_enabled = true
 bbcode_text = "[shake rate=10 level=20][b]GAME OVER[/b][/shake]"
 visible_characters = 0
 text = "GAME OVER"
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="score" type="RichTextLabel" parent="ui/game_over"]
-anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -258.0
-margin_top = -184.0
-margin_right = 258.0
-margin_bottom = 75.0
+margin_top = -183.0
+margin_right = 516.0
+margin_bottom = 76.0
 custom_fonts/bold_font = ExtResource( 10 )
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="high_scores" type="RichTextLabel" parent="ui/game_over"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -516.0
+margin_top = -256.0
+margin_bottom = 142.0
+custom_fonts/mono_font = SubResource( 7 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -276,14 +297,15 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -546.0
-margin_top = -312.0
+margin_top = -274.0
 margin_right = 551.0
-margin_bottom = 2.0
+margin_bottom = -91.0
 custom_fonts/normal_font = SubResource( 2 )
 visible_characters = 0
 percent_visible = 0.0
 text = "Sipping lukewarm instant coffee, the operations manager on your distant spaceship sighs as your signal disappears from the monitor.
 The Flat Earth Conglomerate Ex Selenes' secret discovery will keep eluding Earthen scientists for the time being..."
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -322,6 +344,9 @@ anims/info = SubResource( 5 )
 margin_right = 1920.0
 margin_bottom = 1080.0
 color = Color( 0, 0, 0, 0.752941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="w" type="Sprite" parent="ui/info"]
 position = Vector2( 384, 320 )

@@ -9,6 +9,8 @@ extents = Vector2( 20, 60 )
 [node name="group_top" type="Node2D"]
 script = ExtResource( 1 )
 enemy_scene = ExtResource( 2 )
+speed_endgame = 600
+spawn_time_endgame = Vector2( 1, 2 )
 
 [node name="bumper0" type="Area2D" parent="."]
 position = Vector2( 20, 0 )

@@ -5,7 +5,7 @@ var start_time = OS.get_system_time_secs()
 var time_passed = 0
 var counter = 0
 # Ramping up difficulty until this time (s), then constant.
-var endgame_time = 180
+var endgame_time = 240
 
 var game_over = false
 
@@ -24,10 +24,11 @@ const HIGH_SCORES_FILE = "user://highscores.cfg"
 
 # Stores as an array of arrays with score and name.
 var high_scores = [
-	[10000, "Godette"],
+	[25000, "Space Godette"],
+	[20000, "Juan Alpaca"],
+	[15000, "Minilens Mk II"],
+	[10000, "Billy Blaze"],
 	[9001, "Vegeta"],
-	[8000, "Juan Alpaca"],
-	[6000, "Minilens Mk II"],
 	[5000, "Melon Musk"],
 ]
 

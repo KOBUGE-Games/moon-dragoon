@@ -30,7 +30,6 @@ func get_spawn_time():
 		return rand_range(spawn_time.x, spawn_time.y)
 
 
-
 func spawn_enemy(slot):
 	var enemy = enemy_scene.instance()
 	enemy.group = enemy_group
@@ -59,16 +58,11 @@ func _ready():
 	for slot in $slots.get_child_count():
 		slots_state.append(true)
 
-	# Debug code to start with all slots filled.
-	if false:
-		for slot in slots_state.size():
-			spawn_enemy(slot)
-
 
 func _physics_process(delta):
 	# Recalculate speed based on time ratio once in a while.
 	counter += 1
-	if counter > 300:
+	if counter > 100:
 		counter = 0
 		speed = lerp(speed, speed_endgame, global.get_difficulty_ratio())
 
