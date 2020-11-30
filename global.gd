@@ -3,6 +3,8 @@ extends Node
 
 var start_time = OS.get_system_time_secs()
 var time_passed = 0
+var time_paused = 0
+var last_pause_time = 0
 var counter = 0
 # Ramping up difficulty until this time (s), then constant.
 var endgame_time = 240
@@ -46,7 +48,7 @@ func _physics_process(_delta):
 	counter += 1
 	if counter > 30:
 		counter = 0
-		time_passed = OS.get_system_time_secs() - start_time
+		time_passed = OS.get_system_time_secs() - start_time - time_paused
 
 	# toggle all music and sfx
 	if Input.is_action_just_pressed("toggle music") and music:
@@ -91,12 +93,23 @@ func sort_high_scores(a, b):
 func restart():
 	start_time = OS.get_system_time_secs()
 	time_passed = 0
+	time_paused = 0
+	last_pause_time = 0
 	game_over = false
 	score = 0
 	combo = 0
 	highest_combo = 0
 	enemies_killed = 0
 	get_tree().reload_current_scene()
+
+
+func pause(enable):
+	get_tree().set_pause(enable)
+	# Correct the passing of time while in menu.
+	if enable:
+		last_pause_time = OS.get_system_time_secs()
+	else:
+		time_paused += OS.get_system_time_secs() - last_pause_time
 
 
 func load_high_scores():
