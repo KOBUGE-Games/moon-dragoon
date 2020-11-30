@@ -141,7 +141,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.478431, 0.478431, 0.478431, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "info"
 length = 2.0
 loop = true
@@ -170,7 +170,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.501961, 0.501961, 0.501961, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.501961, 0.501961, 0.501961, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 48
 font_data = ExtResource( 8 )
 
@@ -304,7 +304,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ui"]
 anims/game_over = SubResource( 3 )
 anims/highlight_button = SubResource( 4 )
-anims/info = SubResource( 6 )
+anims/info = SubResource( 5 )
 
 [node name="info" type="Control" parent="ui"]
 margin_right = 40.0
@@ -480,7 +480,7 @@ margin_left = -52.0
 margin_top = -53.0
 margin_right = 76.0
 margin_bottom = 75.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center]esc[/center]"
 text = "esc"
