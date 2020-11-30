@@ -188,8 +188,8 @@ one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
-hframes = 4
 vframes = 3
+hframes = 4
 
 [node name="explosion" type="Sprite" parent="."]
 visible = false
@@ -235,6 +235,5 @@ position = Vector2( 120, 0 )
 
 [node name="anim_nuts" type="AnimationPlayer" parent="."]
 anims/dance = SubResource( 5 )
-
 [connection signal="timeout" from="bullet_time" to="." method="_on_bullet_time_timeout"]
 [connection signal="timeout" from="die_time" to="." method="_on_die_time_timeout"]

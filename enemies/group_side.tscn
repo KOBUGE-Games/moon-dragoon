@@ -37,6 +37,5 @@ position = Vector2( 0, 350 )
 
 [node name="slot2" type="Position2D" parent="slots"]
 position = Vector2( 0, 550 )
-
 [connection signal="area_entered" from="bumper0" to="." method="_on_bumper_area_entered"]
 [connection signal="area_entered" from="bumper1" to="." method="_on_bumper_area_entered"]

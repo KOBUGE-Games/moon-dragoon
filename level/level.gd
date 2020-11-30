@@ -7,6 +7,13 @@ var terrain_bump = preload("res://terrain/terrain_bump.tscn")
 # Holds reference to last instanced terrain to find its end position.
 onready var last_terrain = $terrain/terrain_flat4
 
+func _ready():
+	if (randi() % 2):
+		$music1.play()
+		$music2.stop()
+	else:
+		$music1.stop()
+		$music2.play()
 
 func create_terrain():
 	if previous_terrain: # create flat terrain because previous was a bump
