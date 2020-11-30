@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://terrain/terrain_flat.tscn" type="PackedScene" id=2]
@@ -6,6 +6,126 @@
 [ext_resource path="res://enemies/group_side.tscn" type="PackedScene" id=4]
 [ext_resource path="res://enemies/group_top.tscn" type="PackedScene" id=5]
 [ext_resource path="res://level/ui.gd" type="Script" id=6]
+[ext_resource path="res://fonts/firasans_bold_big.tres" type="DynamicFont" id=7]
+[ext_resource path="res://fonts/FiraSans-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://fonts/firesans_regular_medium.tres" type="DynamicFont" id=9]
+[ext_resource path="res://fonts/firesans_bold_medium.tres" type="DynamicFont" id=10]
+[ext_resource path="res://fonts/firasans_regular_big.tres" type="DynamicFont" id=11]
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 8 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "game_over"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("game_over/title:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 9 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "show_score"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("game_over:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("game_over/score:bbcode_text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("game_over/restart:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("game_over/random_bit:percent_visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 3, 6.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "highlight_button"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("game_over/restart:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("game_over/restart:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.870588, 0.721569, 0.945098, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="level1" type="Node2D"]
 script = ExtResource( 3 )
@@ -38,16 +158,101 @@ position = Vector2( 3072, 1080 )
 [node name="ui" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
 
-[node name="score" type="Label" parent="ui"]
+[node name="live_score" type="Label" parent="ui"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 84.0
-margin_bottom = 47.0
-rect_scale = Vector2( 2, 2 )
+margin_right = 258.0
+margin_bottom = 139.0
+custom_fonts/font = SubResource( 5 )
 text = "Score: 0
-Combo: 1x"
+Combo: 1x
+Enemies killed: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="game_over" type="Control" parent="ui"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -663.0
+margin_top = -410.0
+margin_right = 663.0
+margin_bottom = 428.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="RichTextLabel" parent="ui/game_over"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -440.0
+margin_right = 442.0
+margin_bottom = 176.0
+custom_fonts/bold_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 11 )
+bbcode_enabled = true
+bbcode_text = "[shake rate=10 level=20][b]GAME OVER[/b][/shake]"
+visible_characters = 9
+text = "GAME OVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="RichTextLabel" parent="ui/game_over"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -258.0
+margin_top = -184.0
+margin_right = 258.0
+margin_bottom = 75.0
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="random_bit" type="RichTextLabel" parent="ui/game_over"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -546.0
+margin_top = -312.0
+margin_right = 551.0
+margin_bottom = 2.0
+custom_fonts/normal_font = SubResource( 4 )
+visible_characters = 0
+percent_visible = 0.0
+text = "Sipping lukewarm instant coffee, the operations manager on your distant spaceship sighs as your signal disappears from the monitor.
+The Flat Earth Conglomerate Ex Selenes' secret discovery will keep eluding Earthen scientists for the time being..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="restart" type="Button" parent="ui/game_over"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -225.0
+margin_top = -100.0
+margin_right = 225.0
+rect_pivot_offset = Vector2( 225, 50 )
+custom_fonts/font = ExtResource( 9 )
+text = "Send reinforcements!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui"]
+anims/game_over = SubResource( 2 )
+anims/highlight_button = SubResource( 3 )
+
 [connection signal="killed" from="player" to="." method="_on_player_killed"]
+[connection signal="pressed" from="ui/game_over/restart" to="ui" method="_on_restart_pressed"]

@@ -43,7 +43,6 @@ func _ready():
 	timer.name = "spawn_timer"
 	timer.wait_time = get_spawn_time() / 2.0 # Go faster the first round.
 	timer.autostart = true
-	# warning-ignore:return_value_discarded
 	timer.connect("timeout", self, "_on_spawn_timer_timeout")
 	add_child(timer)
 
