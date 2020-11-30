@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://bullet/bullet.gd" type="Script" id=1]
 [ext_resource path="res://bullet/bullet.png" type="Texture" id=2]
+[ext_resource path="res://enemies/explosion192.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -37,6 +38,57 @@ tracks/1/keys = {
 "values": [ Vector2( 0.8, 0.65 ), Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "splash"
+tracks/0/type = "value"
+tracks/0/path = NodePath("splash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("splash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("shimmer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="bullet" type="Area2D"]
 script = ExtResource( 1 )
 
@@ -56,9 +108,16 @@ rotation = 1.5708
 texture = ExtResource( 2 )
 vframes = 3
 
+[node name="splash" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+hframes = 8
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
 anims/default = SubResource( 2 )
+anims/splash = SubResource( 3 )
 
 [connection signal="area_entered" from="." to="." method="_on_bullet_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]

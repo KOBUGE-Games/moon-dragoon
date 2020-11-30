@@ -12,16 +12,15 @@
 [ext_resource path="res://fonts/firesans_bold_medium.tres" type="DynamicFont" id=10]
 [ext_resource path="res://fonts/firasans_regular_big.tres" type="DynamicFont" id=11]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 8 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "game_over"
+[sub_resource type="Animation" id=3]
 length = 7.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("game_over/title:visible_characters")
@@ -98,8 +97,7 @@ tracks/5/keys = {
 "values": [ 0.0, 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "highlight_button"
+[sub_resource type="Animation" id=4]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -143,16 +141,18 @@ position = Vector2( 128, 952 )
 position = Vector2( 1920, 200 )
 enemy_group = "enemies_right"
 
-[node name="terrain_flat" parent="." instance=ExtResource( 2 )]
+[node name="terrain" type="Node2D" parent="."]
+
+[node name="terrain_flat" parent="terrain" instance=ExtResource( 2 )]
 position = Vector2( 0, 1080 )
 
-[node name="terrain_flat2" parent="." instance=ExtResource( 2 )]
+[node name="terrain_flat2" parent="terrain" instance=ExtResource( 2 )]
 position = Vector2( 1024, 1080 )
 
-[node name="terrain_flat3" parent="." instance=ExtResource( 2 )]
+[node name="terrain_flat3" parent="terrain" instance=ExtResource( 2 )]
 position = Vector2( 2048, 1080 )
 
-[node name="terrain_flat4" parent="." instance=ExtResource( 2 )]
+[node name="terrain_flat4" parent="terrain" instance=ExtResource( 2 )]
 position = Vector2( 3072, 1080 )
 
 [node name="ui" type="CanvasLayer" parent="."]
@@ -163,7 +163,7 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = 258.0
 margin_bottom = 139.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "Score: 0
 Combo: 1x
 Enemies killed: 0"
@@ -226,7 +226,7 @@ margin_left = -546.0
 margin_top = -312.0
 margin_right = 551.0
 margin_bottom = 2.0
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 2 )
 visible_characters = 0
 percent_visible = 0.0
 text = "Sipping lukewarm instant coffee, the operations manager on your distant spaceship sighs as your signal disappears from the monitor.
@@ -251,8 +251,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ui"]
-anims/game_over = SubResource( 2 )
-anims/highlight_button = SubResource( 3 )
+anims/game_over = SubResource( 3 )
+anims/highlight_button = SubResource( 4 )
 
 [connection signal="killed" from="player" to="." method="_on_player_killed"]
 [connection signal="pressed" from="ui/game_over/restart" to="ui" method="_on_restart_pressed"]

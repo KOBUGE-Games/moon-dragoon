@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/player.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Terrain",
+"language": "GDScript",
+"path": "res://terrain/terrain.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
-"Player": ""
+"Player": "",
+"Terrain": ""
 }
 
 [application]

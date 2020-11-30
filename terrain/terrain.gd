@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Terrain
 
 
 export var length = 1024
@@ -15,5 +16,5 @@ func _physics_process(_delta):
 		# Defer call as we can't add children during _integrate_forces.
 		# It's better to defer here than in the actual method to ensure proper
 		# position of the terrain instance.
-		get_parent().call_deferred("create_terrain")
+		get_parent().get_parent().call_deferred("create_terrain")
 		queue_free()

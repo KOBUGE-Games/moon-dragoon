@@ -8,6 +8,10 @@ export var direction = Vector2(0, 1)
 export var cooldown_min = 2.5
 export var cooldown_max = 6.0
 
+# When bullets hit the ground we yield to play an animation before
+# freeing, so make sure we're not freeing it from another function.
+var can_free = true
+
 
 func get_cooldown():
 	return rand_range(cooldown_min, cooldown_max)
@@ -31,14 +35,28 @@ func _ready():
 func _physics_process(delta):
 	position += direction * speed * delta
 
-	if position.x < 0 or position.x > global.screen_size.x \
-			or position.y < 0 or position.y > global.screen_size.y:
+	if can_free and \
+			(position.x < 0 or position.x > global.screen_size.x \
+			or position.y < 0 or position.y > global.screen_size.y):
 		queue_free()
 
 
 func _on_bullet_body_entered(body):
 	if not friendly and body is Player:
 		body.hit(direction)
+		queue_free()
+	if body is Terrain:
+		# Stop detecting.
+		can_free = false
+		collision_layer = 0
+		collision_mask = 0
+		# Random delay to go "in" the terrain.
+		yield(get_tree().create_timer(rand_range(0, 0.15)), "timeout")
+		$AnimationPlayer.play("splash")
+		# Follow terrain while exploding.
+		direction = Vector2(-1, 0)
+		speed = body.speed
+		yield($AnimationPlayer, "animation_finished")
 		queue_free()
 
 
