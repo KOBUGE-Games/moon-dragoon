@@ -13,8 +13,9 @@ enemy_scene = ExtResource( 2 )
 enemy_group = "enemies_left"
 direction = Vector2( 0, 1 )
 speed = 200
-spawn_time_min = 3.0
-spawn_time_max = 7.0
+speed_endgame = 350
+spawn_time_earlygame = Vector2( 3, 7 )
+spawn_time_endgame = Vector2( 1.5, 4 )
 
 [node name="bumper0" type="Area2D" parent="."]
 

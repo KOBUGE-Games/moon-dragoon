@@ -4,8 +4,12 @@ class_name Enemy
 
 export(PackedScene) var bullet_scene
 
-export var bullet_speed = 400
 export var base_score = 25
+export var bullet_speed = 400
+export var bullet_speed_endgame : int = 700
+
+export(Vector2) var cooldown_earlygame = Vector2(2.5, 6.0)
+export(Vector2) var cooldown_endgame = Vector2(1.0, 3.5)
 
 const BULLET_DIRECTIONS = {
 	"enemies_top": Vector2(0, 1),
@@ -48,7 +52,19 @@ func _ready():
 	# Start moving animation.
 	$AnimationPlayer.play("boost")
 
-	$bullet_time.start(rand_range(2.0, 5.0))
+	# Fast shoot on spawn.
+	$bullet_time.start(rand_range(0.5, 2.0))
+
+	# Difficulty based on time.
+	bullet_speed = lerp(bullet_speed, bullet_speed_endgame, global.get_difficulty_ratio())
+
+
+func get_cooldown():
+	# Rank up difficulty over time
+	var cooldown = cooldown_earlygame.linear_interpolate(
+				cooldown_endgame,
+				global.get_difficulty_ratio())
+	return rand_range(cooldown.x, cooldown.y)
 
 
 func _on_bullet_time_timeout():
@@ -66,7 +82,7 @@ func _on_bullet_time_timeout():
 		bullet.direction = BULLET_DIRECTIONS[group]
 		bullet.rotation_degrees = -bullet.direction.x * 90
 		bullet.friendly = false
-		$bullet_time.wait_time = bullet.get_cooldown()
+		$bullet_time.wait_time = get_cooldown()
 	get_parent().add_child(bullet)
 
 

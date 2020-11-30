@@ -1,20 +1,13 @@
 extends Area2D
 
-export var speed = 300
+var speed : int = 300
 export var friendly = false
 
 export var direction = Vector2(0, 1)
 
-export var cooldown_min = 2.5
-export var cooldown_max = 6.0
-
 # When bullets hit the ground we yield to play an animation before
 # freeing, so make sure we're not freeing it from another function.
 var can_free = true
-
-
-func get_cooldown():
-	return rand_range(cooldown_min, cooldown_max)
 
 
 func _ready():

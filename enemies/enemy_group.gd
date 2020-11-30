@@ -6,9 +6,12 @@ export(PackedScene) var enemy_scene
 export var enemy_group = "enemies_top"
 export var direction = Vector2(1, 0)
 export var speed = 300
+export var speed_endgame = 500
+var counter = 0
+var safe_area = Rect2(-global.screen_size, 3 * global.screen_size)
 
-export var spawn_time_min = 2.0
-export var spawn_time_max = 5.0
+export(Vector2) var spawn_time_earlygame = Vector2(2.0, 5.0)
+export(Vector2) var spawn_time_endgame = Vector2(1.0, 3.0)
 
 # Those are initialized in ready as we use the same script for two
 # different scenes, so we shouldn't expect a given scene structure.
@@ -20,7 +23,11 @@ func get_spawn_time():
 	if global.game_over: # Go nuts!
 		return rand_range(1.0, 2.0)
 	else:
-		return rand_range(spawn_time_min, spawn_time_max)
+		# Rank up difficulty over time
+		var spawn_time = spawn_time_earlygame.linear_interpolate(
+					spawn_time_endgame,
+					global.get_difficulty_ratio())
+		return rand_range(spawn_time.x, spawn_time.y)
 
 
 
@@ -59,6 +66,19 @@ func _ready():
 
 
 func _physics_process(delta):
+	# Recalculate speed based on time ratio once in a while.
+	counter += 1
+	if counter > 300:
+		counter = 0
+		speed = lerp(speed, speed_endgame, global.get_difficulty_ratio())
+
+	# Fix position if we ended up going out of screen by mistake.
+	if not safe_area.has_point($slots.global_position):
+		if enemy_group == "enemies_top":
+			$slots.position.x = (global.screen_size.x - position.x) / 2
+		else:
+			$slots.position.y = (global.screen_size.y - position.y) / 2
+
 	# We move the whole slots group to move the enemies in sync,
 	# but only if there are actual enemies in the group (since they're the ones
 	# used to invert direction when hitting bumpers).
@@ -68,13 +88,14 @@ func _physics_process(delta):
 
 func is_slot_in_range(slot):
 	var slot_node = $slots.get_child(slot)
+	var gpos = slot_node.global_position
 	var in_range = false
 	if enemy_group == "enemies_top":
-		in_range = (slot_node.global_position.x > position.x + $bumper0.position.x + 100 and
-				slot_node.global_position.x < position.x + $bumper1.position.x - 100)
+		in_range = (gpos.x > position.x + $bumper0.position.x + 100 and
+				gpos.x < position.x + $bumper1.position.x - 100)
 	else:
-		in_range = (slot_node.global_position.y > position.y + $bumper0.position.y + 100 and
-				slot_node.global_position.y < position.y + $bumper1.position.y - 100)
+		in_range = (gpos.y > position.y + $bumper0.position.y + 100 and
+				gpos.y < position.y + $bumper1.position.y - 100)
 	return in_range
 
 
