@@ -17,7 +17,11 @@ var slots_state : Array
 
 
 func get_spawn_time():
-	return rand_range(spawn_time_min, spawn_time_max)
+	if global.game_over: # Go nuts!
+		return rand_range(1.0, 2.0)
+	else:
+		return rand_range(spawn_time_min, spawn_time_max)
+
 
 
 func spawn_enemy(slot):
@@ -28,6 +32,9 @@ func spawn_enemy(slot):
 	enemy.connect("killed", self, "_on_enemy_killed")
 	$slots.get_child(slot).add_child(enemy)
 	slots_state[slot] = false
+
+	if global.game_over: # For the lulz.
+		enemy.go_nuts()
 
 
 func _ready():

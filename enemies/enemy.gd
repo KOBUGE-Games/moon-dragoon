@@ -16,6 +16,9 @@ const BULLET_DIRECTIONS = {
 var group
 var slot
 
+# Used for a hacky, gameover animation.
+var frenzy = false
+
 
 signal killed(slot)
 
@@ -51,14 +54,20 @@ func _ready():
 func _on_bullet_time_timeout():
 	# Spawn bullet.
 	var bullet = bullet_scene.instance()
-	bullet.direction = BULLET_DIRECTIONS[group]
-	bullet.rotation_degrees = -bullet.direction.x * 90
 	bullet.position = $sprite_rotate/exit.global_position
 	bullet.speed = bullet_speed
-	bullet.friendly = false
+	if frenzy: # We go nuts for the end animation.
+		bullet.direction = ($sprite_rotate/exit.global_position - global_position).normalized()
+		bullet.rotation = bullet.direction.angle() - PI / 2
+		# Friendly fire!
+		bullet.friendly = true
+		$bullet_time.wait_time = randf()
+	else: # Normal behavior.
+		bullet.direction = BULLET_DIRECTIONS[group]
+		bullet.rotation_degrees = -bullet.direction.x * 90
+		bullet.friendly = false
+		$bullet_time.wait_time = bullet.get_cooldown()
 	get_parent().add_child(bullet)
-	# Restart with bullet's cooldown time.
-	$bullet_time.wait_time = bullet.get_cooldown()
 
 
 func _on_die_time_timeout():
@@ -67,3 +76,15 @@ func _on_die_time_timeout():
 	# Die after explosion animation finished
 	emit_signal("killed", slot)
 	queue_free()
+
+
+# Called on gameover for a silly animation.
+func go_nuts():
+	# Make bullets rain
+	frenzy = true
+	bullet_speed = 800
+	$bullet_time.start(randf())
+	if randi() % 2:
+		scale.x = -1
+	$anim_nuts.playback_speed = rand_range(0.8, 1.2)
+	$anim_nuts.play("dance")

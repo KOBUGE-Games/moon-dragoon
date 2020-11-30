@@ -25,3 +25,9 @@ func instance_terrain(terrain_type):
 	terrain_new.set_position(last_terrain.position + Vector2(last_terrain.length, 0))
 	add_child(terrain_new)
 	last_terrain = terrain_new
+
+
+func _on_player_killed():
+	global.game_over = true
+	get_tree().call_group("enemies", "go_nuts")
+	$ui.game_over()
