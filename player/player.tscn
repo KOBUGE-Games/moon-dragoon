@@ -136,7 +136,6 @@ position = Vector2( 176, -112 )
 shape = SubResource( 5 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2( 0, -72 )
 rotation = 1.5708
 polygon = PoolVector2Array( 40.0001, 39.9999, -71.9996, 104, -40.0003, -79.9999, 39.9999, -32.0001 )
@@ -154,6 +153,9 @@ rotation = -0.785397
 position = Vector2( -24, 24 )
 rotation = -0.785397
 
+[node name="AnimationPlayer" parent="wheel2" index="5"]
+blend_times = [ "rotate", "rotate", 0.1, "rotate", "rotate_stop", 0.1, "rotate_stop", "rotate", 0.2 ]
+
 [node name="shield" type="Sprite" parent="."]
 visible = false
 self_modulate = Color( 1, 1, 1, 0 )
@@ -162,7 +164,7 @@ texture = ExtResource( 6 )
 
 [node name="shoot_timer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.2
+wait_time = 0.4
 one_shot = true
 
 [node name="shield_timer" type="Timer" parent="."]
@@ -170,24 +172,11 @@ process_mode = 0
 wait_time = 2.0
 one_shot = true
 
-[node name="shield_label" type="Label" parent="."]
-visible = false
-margin_left = -26.9695
-margin_top = -179.048
-margin_right = 28.0305
-margin_bottom = -165.048
-text = "Shield: 3"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="shield_lifes" type="TextureProgress" parent="."]
 margin_left = -128.0
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 96.0
-max_value = 100.0
-step = 1.0
 value = 50.0
 texture_under = ExtResource( 9 )
 texture_progress = ExtResource( 7 )
@@ -203,6 +192,7 @@ margin_bottom = 104.0
 rect_scale = Vector2( 1, 0.25 )
 texture_under = ExtResource( 11 )
 texture_progress = ExtResource( 10 )
+
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
 
 [editable path="wheel2"]

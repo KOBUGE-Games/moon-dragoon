@@ -4,7 +4,7 @@ class_name Enemy
 
 export(PackedScene) var bullet_scene
 
-export var bullet_speed = 300
+export var bullet_speed = 400
 
 const BULLET_DIRECTIONS = {
 	"enemies_top": Vector2(0, 1),
@@ -37,7 +37,11 @@ func _ready():
 	# face enemy in shooting direction
 	var sprite_rotation = BULLET_DIRECTIONS[group].angle()
 	$sprite_rotate.set_rotation(sprite_rotation)
-	# start moving animation
+	# Fade in from invisible.
+	modulate.a = 0
+	$AnimationPlayer.play("fadein")
+	yield($AnimationPlayer, "animation_finished")
+	# Start moving animation.
 	$AnimationPlayer.play("boost")
 
 	$bullet_time.start(rand_range(2.0, 5.0))

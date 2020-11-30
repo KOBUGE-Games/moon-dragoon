@@ -13,7 +13,7 @@ func _ready():
 	$refill.set_max(shield_timer.get_wait_time()*100)
 	pass # Replace with function body.
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	self.set_rotation_degrees(-get_parent().get_rotation_degrees())
 	self._set_global_position(Vector2(get_parent().get_global_position().x-128,global.screen_size.y-96))
 	if get_parent().shield >= 0: # prevent negative values to add +1 to the bar
@@ -22,4 +22,4 @@ func _physics_process(delta):
 		$refill.set_value((shield_timer.get_wait_time()-shield_timer.get_time_left())*100)
 	else:
 		$refill.set_value(0)
-	
+

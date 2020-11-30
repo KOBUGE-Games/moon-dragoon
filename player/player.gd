@@ -35,9 +35,6 @@ func _physics_process(_delta):
 		shoot_timer.start() # start cool down
 		weapon.shoot((get_global_mouse_position() - self.get_global_position()).normalized())
 
-	# shield debug
-	$shield_label.text = "Shield: %d - %f" % [shield, $shield_timer.time_left]
-
 
 func _integrate_forces(state):
 	# input events
@@ -94,7 +91,6 @@ func _integrate_forces(state):
 
 
 func hit(direction):
-	print("Player hit")
 	if shield > 0:
 		shield -= 1
 		$shield_timer.start()

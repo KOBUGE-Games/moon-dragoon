@@ -20,7 +20,6 @@ func _ready():
 	# scene to move independently from player.
 	set_as_toplevel(true)
 
-	# FIXME: This is only for the lulz until proper artwork.
 	if friendly:
 		$Sprite.set_frame(0)
 		$shimmer.set_self_modulate(Color("ffcc00"))
@@ -45,6 +44,5 @@ func _on_bullet_body_entered(body):
 
 func _on_bullet_area_entered(area):
 	if friendly and area is Enemy:
-		print("Enemy hit!")
 		area.die()
 		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://enemies/enemy.gd" type="Script" id=1]
 [ext_resource path="res://bullet/bullet.tscn" type="PackedScene" id=2]
@@ -114,23 +114,40 @@ tracks/3/keys = {
 "values": [ true, true, false ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "fadein"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="enemy" type="Area2D"]
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="bullet_time" type="Timer" parent="."]
+process_mode = 0
 
 [node name="die_time" type="Timer" parent="."]
+process_mode = 0
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
-vframes = 3
 hframes = 4
+vframes = 3
 
 [node name="explosion" type="Sprite" parent="."]
 visible = false
@@ -143,6 +160,7 @@ frame = 7
 autoplay = "boost"
 anims/boost = SubResource( 2 )
 anims/explosion = SubResource( 3 )
+anims/fadein = SubResource( 4 )
 
 [node name="sprite_rotate" type="Node2D" parent="."]
 show_behind_parent = true
@@ -172,5 +190,6 @@ region_rect = Rect2( 192, 130, 128, 60 )
 
 [node name="exit" type="Position2D" parent="sprite_rotate"]
 position = Vector2( 120, 0 )
+
 [connection signal="timeout" from="bullet_time" to="." method="_on_bullet_time_timeout"]
 [connection signal="timeout" from="die_time" to="." method="_on_die_time_timeout"]
