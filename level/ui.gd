@@ -23,12 +23,14 @@ func show_info():
 	$info.show()
 	$info/animation.play("info")
 	get_tree().set_pause(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func hide_info():
 	$info.hide()
 	get_tree().set_pause(false)
 	$info/animation.stop()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
 func _process(_delta):
