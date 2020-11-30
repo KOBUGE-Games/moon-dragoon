@@ -116,6 +116,7 @@ region_rect = Rect2( 0, 192, 256, 192 )
 
 [node name="weapon" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -64 )
+bullet_speed = 1000
 
 [node name="weapon_cover" type="Sprite" parent="."]
 position = Vector2( 0, -64 )
@@ -183,7 +184,7 @@ one_shot = true
 
 [node name="shield_timer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="shield_lifes" type="TextureProgress" parent="."]
