@@ -21,14 +21,14 @@ func _ready():
 
 func show_info():
 	$info.show()
-	$AnimationPlayer.play("info")
+	$info/animation.play("info")
 	get_tree().set_pause(true)
 
 
 func hide_info():
 	$info.hide()
 	get_tree().set_pause(false)
-	$AnimationPlayer.stop()
+	$info/animation.stop()
 
 
 func _process(_delta):
