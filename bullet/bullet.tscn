@@ -90,6 +90,7 @@ tracks/3/keys = {
 }
 
 [node name="bullet" type="Area2D"]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

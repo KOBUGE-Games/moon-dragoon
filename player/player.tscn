@@ -153,6 +153,9 @@ rotation = -0.785397
 position = Vector2( -24, 24 )
 rotation = -0.785397
 
+[node name="AnimationPlayer" parent="wheel2" index="5"]
+blend_times = [ "rotate", "rotate", 0.1, "rotate", "rotate_stop", 0.1, "rotate_stop", "rotate", 0.2 ]
+
 [node name="shield" type="Sprite" parent="."]
 visible = false
 position = Vector2( 0, -32 )
