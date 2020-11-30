@@ -24,6 +24,8 @@ onready var weapon = $weapon
 
 var weapon_rotation: float
 
+export(NodePath) var bullets_container
+
 
 signal killed
 
@@ -36,7 +38,9 @@ func _physics_process(_delta):
 	# weapon shoot
 	if Input.is_action_pressed("mouse_left") and shoot_timer.is_stopped():
 		shoot_timer.start() # start cool down
-		weapon.shoot((get_global_mouse_position() - self.get_global_position()).normalized())
+		var bullet = weapon.shoot(
+				(get_global_mouse_position() - self.get_global_position()).normalized())
+		get_node(bullets_container).add_child(bullet)
 		$sounds/shoot.play()
 
 

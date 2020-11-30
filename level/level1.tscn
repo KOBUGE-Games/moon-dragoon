@@ -179,6 +179,9 @@ script = ExtResource( 3 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 128, 952 )
+bullets_container = NodePath("../player_bullets")
+
+[node name="player_bullets" type="Node2D" parent="."]
 
 [node name="enemies" type="Node2D" parent="."]
 

@@ -116,7 +116,6 @@ region_rect = Rect2( 0, 192, 256, 192 )
 
 [node name="weapon" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -64 )
-bullets_container = NodePath("../bullets")
 
 [node name="weapon_cover" type="Sprite" parent="."]
 position = Vector2( 0, -64 )
