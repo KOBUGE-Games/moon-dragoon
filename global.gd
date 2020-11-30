@@ -56,8 +56,12 @@ func _physics_process(_delta):
 		music = true
 
 
+func get_score_modifier():
+	return float(time_passed) / endgame_time
+
+
 func get_difficulty_ratio():
-	return min(float(time_passed) / endgame_time, 1.0)
+	return min(get_score_modifier(), 1.0)
 
 
 func increase_score(base_score):
@@ -65,7 +69,8 @@ func increase_score(base_score):
 		return
 	enemies_killed += 1
 	combo += 1
-	score += base_score * combo
+	var score_mod = pow(1 + get_score_modifier(), 1.3)
+	score += base_score * combo * score_mod
 	if combo > highest_combo:
 		highest_combo = combo
 
