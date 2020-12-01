@@ -9,6 +9,15 @@ Combo: %dx
 Enemies killed: %d
 """
 
+const RANDOM_BITS = [
+	"[code]ALL YOUR BASE ARE BELONG TO US.[/code] (meow)",
+	"Alas, your enlightenment was brief and you shall never make the Planar Earth Selenian Territories' discovery public.",
+	"*crrr* *kssh* [code]TAKE OFF EVERY 'ZIG'!![/code]\n*gshht* [code]YOU KNOW WHAT YOU DOING.[/code] *clang*",
+	"As you are blown to pieces, you turn towards the distant [color=aqua]Blue Disc[/color] and mutter ̈́“For great justice...”",
+	"[b][fade start=5 length=5]Rosebud...[/fade][/b]",
+	"[color=aqua]Blue[/color]... NO! [color=yellow][b][fade start=3 length=14]Yellooooooooow...[/fade][/b][/color]",
+	"[shake rate=10 level=20]THE END.[/shake]",
+]
 
 func _ready():
 	$game_over.hide()
@@ -17,6 +26,8 @@ func _ready():
 	if global.first_run:
 		global.first_run = false
 		show_info()
+
+	$game_over/random_bit.set_bbcode(RANDOM_BITS[randi() % RANDOM_BITS.size()])
 
 
 func show_info():

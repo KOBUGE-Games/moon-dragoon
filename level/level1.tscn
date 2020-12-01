@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://terrain/terrain_flat.tscn" type="PackedScene" id=2]
@@ -8,24 +8,16 @@
 [ext_resource path="res://level/ui.gd" type="Script" id=6]
 [ext_resource path="res://fonts/firasans_bold_big.tres" type="DynamicFont" id=7]
 [ext_resource path="res://fonts/FiraSans-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://fonts/firesans_regular_medium.tres" type="DynamicFont" id=9]
-[ext_resource path="res://fonts/firesans_bold_medium.tres" type="DynamicFont" id=10]
+[ext_resource path="res://fonts/firasans_regular_medium.tres" type="DynamicFont" id=9]
+[ext_resource path="res://fonts/firasans_bold_medium.tres" type="DynamicFont" id=10]
 [ext_resource path="res://fonts/firasans_regular_big.tres" type="DynamicFont" id=11]
 [ext_resource path="res://level/earth.png" type="Texture" id=12]
 [ext_resource path="res://level/music1.ogg" type="AudioStream" id=13]
 [ext_resource path="res://level/music2.ogg" type="AudioStream" id=14]
 [ext_resource path="res://fonts/buttons.png" type="Texture" id=15]
-[ext_resource path="res://fonts/FiraMono-Regular.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://fonts/firamono_medium.tres" type="DynamicFont" id=16]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 8 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 42
-font_data = ExtResource( 16 )
-
-[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 8 )
 
@@ -147,7 +139,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "info"
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -262,8 +253,9 @@ __meta__ = {
 [node name="score" type="RichTextLabel" parent="ui/game_over"]
 anchor_top = 0.5
 anchor_bottom = 0.5
+margin_left = 62.0
 margin_top = -183.0
-margin_right = 516.0
+margin_right = 546.0
 margin_bottom = 76.0
 custom_fonts/bold_font = ExtResource( 10 )
 custom_fonts/normal_font = ExtResource( 9 )
@@ -278,10 +270,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -516.0
+margin_left = -459.0
 margin_top = -256.0
+margin_right = -8.0
 margin_bottom = 142.0
-custom_fonts/mono_font = SubResource( 7 )
+custom_fonts/mono_font = ExtResource( 16 )
 custom_fonts/bold_font = ExtResource( 10 )
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
@@ -300,11 +293,12 @@ margin_left = -546.0
 margin_top = -274.0
 margin_right = 551.0
 margin_bottom = -91.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/mono_font = ExtResource( 16 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
 visible_characters = 0
 percent_visible = 0.0
-text = "Sipping lukewarm instant coffee, the operations manager on your distant spaceship sighs as your signal disappears from the monitor.
-The Flat Earth Conglomerate Ex Selenes' secret discovery will keep eluding Earthen scientists for the time being..."
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -331,6 +325,7 @@ anims/game_over = SubResource( 3 )
 anims/highlight_button = SubResource( 4 )
 
 [node name="info" type="Control" parent="ui"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
