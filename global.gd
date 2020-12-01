@@ -42,6 +42,13 @@ func _ready():
 	randomize()
 	load_high_scores()
 
+	if (randi() % 2):
+		$music1.play()
+		$music2.stop()
+	else:
+		$music1.stop()
+		$music2.play()
+
 
 func _physics_process(_delta):
 	# Counter used to avoid calling OS functions too often.
@@ -90,7 +97,7 @@ func sort_high_scores(a, b):
 	return a[0] > b[0]
 
 
-func restart():
+func reset():
 	start_time = OS.get_system_time_secs()
 	time_passed = 0
 	time_paused = 0
@@ -100,6 +107,10 @@ func restart():
 	combo = 0
 	highest_combo = 0
 	enemies_killed = 0
+
+
+func restart():
+	reset()
 	get_tree().reload_current_scene()
 
 

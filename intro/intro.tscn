@@ -1,0 +1,254 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://fonts/firasans_bold_big.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/FiraSans-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://level/earth.png" type="Texture" id=3]
+[ext_resource path="res://intro/intro.gd" type="Script" id=4]
+[ext_resource path="res://fonts/firasans_bold_medium.tres" type="DynamicFont" id=5]
+[ext_resource path="res://intro/logo.svg" type="Texture" id=6]
+[ext_resource path="res://fonts/firasans_regular_medium.tres" type="DynamicFont" id=7]
+[ext_resource path="res://fonts/firamono_medium.tres" type="DynamicFont" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "text_blink"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("press_key:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+extra_spacing_bottom = 4
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "show_text"
+length = 22.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("intro_text2:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 3.5, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("intro_text2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3.5, 12 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("intro_text3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 12.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("intro_text3:percent_visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 12.5, 22 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("intro_text1:visible_characters")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.4, 1.9, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 14, 14, 32 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("intro_text1:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="intro" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -2.0
+margin_right = -2.0
+margin_bottom = -2.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="earth" type="Sprite" parent="."]
+position = Vector2( 960, 840 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="title" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+margin_top = 49.0
+margin_bottom = 227.0
+custom_fonts/bold_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][b]Moon Dragoon[/b][/center]"
+text = "Moon Dragoon"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="press_key" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -383.0
+margin_top = -149.0
+margin_right = 384.0
+custom_fonts/bold_font = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center][b]Press any key to start[/b][/center]"
+text = "Press any key to start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="press_key_anim" type="AnimationPlayer" parent="."]
+autoplay = "text_blink"
+anims/text_blink = SubResource( 1 )
+
+[node name="authors" type="RichTextLabel" parent="."]
+margin_left = 30.0
+margin_top = 806.0
+margin_right = 596.0
+margin_bottom = 1019.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "A GitHub Game Off 2020 entry by:
+
+    Johannes Danneker (fry)
+    Rémi Verschelde (Akien)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="authors2" type="RichTextLabel" parent="."]
+margin_left = 1386.0
+margin_top = 800.0
+margin_right = 1900.0
+margin_bottom = 961.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "Open source game made with:"
+text = "Open source game made with:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logo" type="Sprite" parent="."]
+position = Vector2( 1635.08, 958.716 )
+scale = Vector2( 0.50379, 0.50379 )
+texture = ExtResource( 6 )
+
+[node name="intro_text1" type="RichTextLabel" parent="."]
+margin_left = 267.0
+margin_top = 276.0
+margin_right = 1695.0
+margin_bottom = 342.0
+custom_fonts/mono_font = ExtResource( 8 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+bbcode_enabled = true
+bbcode_text = "[center][code]IN A.D. 2101  WAR WAS BEGINNING.[/code][/center]"
+visible_characters = 0
+text = "IN A.D. 2101  WAR WAS BEGINNING."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_text2" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 270.0
+margin_top = 392.0
+margin_right = 1698.0
+margin_bottom = 670.0
+custom_fonts/mono_font = ExtResource( 8 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+bbcode_enabled = true
+bbcode_text = "[center]Wait, wrong script... You're part of a scientific mission to the Moon, and you were deployed as single astronaut in the [b]Moon Dragoon[/b] buggy, first person to set foot (well wheel) on the planet since 1972.[/center]"
+text = "Wait, wrong script... You're part of a scientific mission to the Moon, and you were deployed as single astronaut in the Moon Dragoon buggy, first person to set foot (well wheel) on the planet since 1972."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_text3" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 270.0
+margin_top = 280.0
+margin_right = 1698.0
+margin_bottom = 624.0
+custom_fonts/mono_font = ExtResource( 8 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+bbcode_enabled = true
+bbcode_text = "Upon landing, you glance at the Earth and notice its depth-lacking, disc-like structure. As the revelation of the [b]Earth's flatness[/b] dawns on you, you are greeted by drones advertising themselves as dispatched by the [b]Planar Earth Selenian Territories[/b].
+They don't seem willing to let you go back to the spaceship with your discovery."
+percent_visible = 0.0
+text = "Upon landing, you glance at the Earth and notice its depth-lacking, disc-like structure. As the revelation of the Earth's flatness dawns on you, you are greeted by drones advertising themselves as dispatched by the Planar Earth Selenian Territories.
+They don't seem willing to let you go back to the spaceship with your discovery."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_text_anim" type="AnimationPlayer" parent="."]
+autoplay = "show_text"
+anims/show_text = SubResource( 3 )
