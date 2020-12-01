@@ -372,6 +372,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="arrow1" type="Sprite" parent="ui/info/w"]
+position = Vector2( 0, -128 )
+texture = ExtResource( 15 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[node name="arrow2" type="Sprite" parent="ui/info/w"]
+position = Vector2( 0, -128 )
+texture = ExtResource( 15 )
+region_enabled = true
+region_rect = Rect2( 0, 128, 128, 128 )
+
 [node name="a" type="Sprite" parent="ui/info"]
 position = Vector2( 256, 512 )
 texture = ExtResource( 15 )
