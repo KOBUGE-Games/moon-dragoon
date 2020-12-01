@@ -242,6 +242,7 @@ custom_constants/shadow_offset_y = 4
 bbcode_enabled = true
 bbcode_text = "Upon landing, you glance at the Earth and notice its depth-lacking, disc-like structure. As the revelation of the [b]Earth's flatness[/b] dawns on you, you are greeted by drones advertising themselves as dispatched by the [b]Planar Earth Selenian Territories[/b].
 They don't seem willing to let you go back to the spaceship with your discovery."
+visible_characters = 0
 percent_visible = 0.0
 text = "Upon landing, you glance at the Earth and notice its depth-lacking, disc-like structure. As the revelation of the Earth's flatness dawns on you, you are greeted by drones advertising themselves as dispatched by the Planar Earth Selenian Territories.
 They don't seem willing to let you go back to the spaceship with your discovery."
