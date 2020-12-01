@@ -7,7 +7,8 @@ export var enemy_group = "enemies_top"
 export var direction = Vector2(1, 0)
 export var speed = 300
 export var speed_endgame = 500
-var counter = 0
+var counter_difficulty = 0
+var counter_failed_spawns = 0
 var safe_area = Rect2(-global.screen_size, 3 * global.screen_size)
 
 export(Vector2) var spawn_time_earlygame = Vector2(2.0, 5.0)
@@ -38,6 +39,7 @@ func spawn_enemy(slot):
 	enemy.connect("killed", self, "_on_enemy_killed")
 	$slots.get_child(slot).add_child(enemy)
 	slots_state[slot] = false
+	counter_failed_spawns = 0
 
 	if global.game_over: # For the lulz.
 		enemy.go_nuts()
@@ -61,9 +63,9 @@ func _ready():
 
 func _physics_process(delta):
 	# Recalculate speed based on time ratio once in a while.
-	counter += 1
-	if counter > 100:
-		counter = 0
+	counter_difficulty += 1
+	if counter_difficulty > 100:
+		counter_difficulty = 0
 		speed = lerp(speed, speed_endgame, global.get_difficulty_ratio())
 
 	# Fix position if we ended up going out of screen by mistake.
@@ -123,6 +125,17 @@ func _on_spawn_timer_timeout():
 
 	# If we're here, no free slot was in range.
 	# Retry in a short time.
+	counter_failed_spawns += 1
+	if counter_failed_spawns > 4:
+		# FIXME: Hack, this happens because the group went out of its safe zone
+		# but still within the large bounds currently set in safe_area.
+		# This is all pretty much hacked together and I'm sure there would be
+		# a cleaner way to achieve this without bug nor hack. But well, game jam.
+		print("Working around group out of range issue for '%s'." % enemy_group)
+		if enemy_group == "enemies_top":
+			$slots.position.x = (global.screen_size.x - position.x) / 2
+		else:
+			$slots.position.y = (global.screen_size.y - position.y) / 2
 	timer.wait_time = 0.5
 	timer.start()
 
