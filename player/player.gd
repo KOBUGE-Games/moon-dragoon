@@ -26,6 +26,8 @@ var weapon_rotation: float
 
 export(NodePath) var bullets_container
 
+var dead = false
+
 
 signal killed
 
@@ -120,6 +122,13 @@ func _on_shield_timer_timeout():
 func die():
 	# Explode!
 	$sounds/explode.play()
+
+	# We can get multiple hits while the animation plays.
+	# We keep the explode sound because it's fun, but the rest shouldn't be called.
+	if dead:
+		return
+	dead = true
+
 	$explosion_anim.play("explode")
 	yield($explosion_anim, "animation_finished")
 	emit_signal("killed")
