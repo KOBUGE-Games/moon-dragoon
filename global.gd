@@ -101,7 +101,7 @@ func reset():
 	start_time = OS.get_system_time_secs()
 	time_passed = 0
 	time_paused = 0
-	last_pause_time = 0
+	last_pause_time = start_time
 	game_over = false
 	score = 0
 	combo = 0

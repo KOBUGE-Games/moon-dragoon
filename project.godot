@@ -32,7 +32,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MoonDragoon"
+config/name="Moon Dragoon"
+config/description="2D sidescrolling shooter in Moon-like gravity made in two weeks for the GitHub Game Off 2020 game jam with the theme MOONSHOT.
+
+Developed by Johannes Danneker (fry) and Rémi Verschelde (akien)."
 run/main_scene="res://intro/intro.tscn"
 config/icon="res://level/earth.png"
 
