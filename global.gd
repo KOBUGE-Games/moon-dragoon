@@ -11,7 +11,9 @@ var endgame_time = 240
 
 var game_over = false
 
-var screen_size = OS.get_screen_size()
+var screen_size = Vector2(
+		ProjectSettings.get_setting("display/window/size/width"),
+		ProjectSettings.get_setting("display/window/size/height"))
 
 var score : int = 0
 var combo : int = 0
