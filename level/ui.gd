@@ -21,11 +21,12 @@ const RANDOM_BITS = [
 
 func _ready():
 	$game_over.hide()
-	$info.hide()
 
 	if global.first_run:
 		global.first_run = false
 		show_info()
+	else:
+		hide_info()
 
 	$game_over/random_bit.set_bbcode(RANDOM_BITS[randi() % RANDOM_BITS.size()])
 
@@ -66,6 +67,7 @@ func _process(_delta):
 
 
 func game_over():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$AnimationPlayer.play("game_over")
 	yield($AnimationPlayer, "animation_finished")
 	$AnimationPlayer.play("highlight_button")
