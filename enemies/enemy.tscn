@@ -171,9 +171,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ), Vector2( 1.1, 1.1 ), Vector2( 1.4, 1.4 ), Vector2( 1, 1 ) ]
 }
 
-[node name="enemy" type="Area2D" groups=[
-"enemies",
-]]
+[node name="enemy" type="Area2D" groups=["enemies"]]
 z_index = 1
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
@@ -195,8 +193,8 @@ one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
-vframes = 3
 hframes = 4
+vframes = 3
 
 [node name="explosion" type="Sprite" parent="."]
 visible = false
@@ -245,5 +243,6 @@ anims/dance = SubResource( 5 )
 
 [node name="explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+
 [connection signal="timeout" from="bullet_time" to="." method="_on_bullet_time_timeout"]
 [connection signal="timeout" from="die_time" to="." method="_on_die_time_timeout"]

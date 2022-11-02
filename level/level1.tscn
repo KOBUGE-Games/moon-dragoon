@@ -569,5 +569,6 @@ __meta__ = {
 [node name="earth" type="Sprite" parent="."]
 position = Vector2( 960, 540 )
 texture = ExtResource( 12 )
+
 [connection signal="killed" from="player" to="." method="_on_player_killed"]
 [connection signal="pressed" from="ui/game_over/restart" to="ui" method="_on_restart_pressed"]

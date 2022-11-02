@@ -223,6 +223,7 @@ volume_db = 5.0
 [node name="explode" type="AudioStreamPlayer2D" parent="sounds"]
 stream = ExtResource( 14 )
 volume_db = 10.0
+
 [connection signal="timeout" from="shield_timer" to="." method="_on_shield_timer_timeout"]
 
 [editable path="wheel2"]

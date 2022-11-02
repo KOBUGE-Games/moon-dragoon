@@ -8,6 +8,9 @@ Developed by Johannes Danneker ([@fry-](https://github.com/fry-)) and
 Rémi Verschelde ([@akien-mga](https://github.com/akien-mga)) with
 [Godot Engine](https://godotengine.org).
 
+Originally developed with Godot 3.2.3, but the game is compatible with
+any later 3.x release.
+
 ## License
 
 The source code (scenes files, GDScript code) are under the MIT
